@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.fragments.fragments.ChamadasFragments
 import com.example.fragments.fragments.ConversasFragments
 
@@ -34,17 +36,23 @@ class MainActivity : AppCompatActivity() {
         btnMercado = findViewById(R.id.btn_mercado)
 
         btnMercado.setOnClickListener {
-            val conversasFragment = ConversasFragments()
+            //val conversasFragment = ConversasFragments()
 
             val bundle = bundleOf(
                 "categoria" to "mercado",
                 "usuario" to "Janaina"
             )
-            conversasFragment.arguments = bundle
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_conteudo, conversasFragment)
-                .commit()
+            //conversasFragment.arguments = bundle
+
+//            supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.fragment_conteudo, conversasFragment)
+//                .commit()
+
+            //utilizando ktx fragments:
+            supportFragmentManager.commit {
+                replace<ConversasFragments>(R.id.fragment_conteudo, args = bundle)
+            }
         }
 
         btnChamadas.setOnClickListener {
